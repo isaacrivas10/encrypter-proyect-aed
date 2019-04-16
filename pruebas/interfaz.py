@@ -13,6 +13,7 @@ class Window(QtGui.QWidget):
 		self.workingReadingDir= ""
 		self.workingSavingDir= ""
 		self.password= "Password"
+		self.savePassword= False
 
 		self.setGeometry(350,200,700,350)
 		self.setWindowTitle("Python bad-Encripter")
@@ -35,8 +36,8 @@ class Window(QtGui.QWidget):
 		self.savingTextBox= QtGui.QLineEdit(self)
 		self.savingTextBox.resize(350,35)
 		self.savingTextBox.setEnabled(False)
-		self.readingTextBox.setText("Seleccionar una direccion")
-		self.savingTextBox.setText("Seleccionar una direccion")
+		self.readingTextBox.setText("Direccion a cifrar")
+		self.savingTextBox.setText("Almacenamiento de cifrado")
 
 		label= QtGui.QLabel("Algoritmo:")
 
@@ -45,8 +46,8 @@ class Window(QtGui.QWidget):
 		self.passTextBox.textChanged[str].connect(self.setPassword)
 		self.passTextBox.resize(30, 10)
 
-		# passCheckBox= QtGui.QCheckBox("Guardar", self)
-		# passCheckBox.stateChanged.connect(self.savePasswordOnFile)
+		self.passCheckBox= QtGui.QCheckBox(u"Guardar Contraseña", self)
+		self.passCheckBox.stateChanged.connect(self.savePasswordBool)
 
 		# Definicion de botones
 		readingDirBtn= QtGui.QPushButton(u'\u25bc', self)
@@ -57,11 +58,11 @@ class Window(QtGui.QWidget):
 		savingDirBtn.clicked.connect(partial(self.openFolder, "2"))
 		savingDirBtn.resize(savingDirBtn.minimumSizeHint())
 
-		encriptBtn= QtGui.QPushButton("Encriptar", self)
+		encriptBtn= QtGui.QPushButton("Cifrar", self)
 		encriptBtn.clicked.connect(self.encript)
 		encriptBtn.resize(encriptBtn.minimumSizeHint())
 		
-		decriptBtn= QtGui.QPushButton("Desencriptar", self)
+		decriptBtn= QtGui.QPushButton("Descifrar", self)
 		decriptBtn.clicked.connect(self.decript)
 		decriptBtn.resize(decriptBtn.minimumSizeHint())
 
@@ -80,15 +81,15 @@ class Window(QtGui.QWidget):
 		gridLayout.addWidget(self.savingTextBox, 2, 0)
 		gridLayout.addWidget(savingDirBtn, 2, 1)
 
-		gridLayout.addWidget(self.treeWidget, 3, 0, 5, 1)
+		gridLayout.addWidget(self.treeWidget, 3, 0, 6, 1)
 
 		gridLayout.addWidget(comboBox, 3, 1)
 		
-		gridLayout.addWidget(encriptBtn, 4,1)
-		gridLayout.addWidget(decriptBtn, 5,1)
+		gridLayout.addWidget(encriptBtn, 6,1)
+		gridLayout.addWidget(decriptBtn, 7,1)
 
-		gridLayout.addWidget(self.passTextBox, 6, 1, 1, 2)
-		#gridLayout.addWidget(passCheckBox, 7, 1)
+		gridLayout.addWidget(self.passTextBox, 4, 1, 1, 2)
+		gridLayout.addWidget(self.passCheckBox, 5, 1)
 
 		# Establecemos gridLayout como el layout principal
 		self.setLayout(gridLayout)
@@ -102,27 +103,30 @@ class Window(QtGui.QWidget):
 	def encript(self):
 		print 'Has encriptado %s con %s' % (self.workingSavingDir, 
 			self.currentAlgorithm)
-
+		
 	def decript(self):
 		print 'Has desencriptado %s con %s' % (self.workingSavingDir, 
 			self.currentAlgorithm)
 
-	def savePasswordOnFile(self):
-		pass
+	def savePasswordBool(self):
+		if self.passCheckBox.isChecked():
+			self.savePassword= True
+		else:
+			self.savePassword= False
+		print self.savePassword
 
 	def setPassword(self, text):
-		self.password= self.passTextBox.text()
+		self.password= unicode(self.passTextBox.text())
 
 	def setEncriptionAlgorithm(self, algrithm):
 		self.currentAlgorithm= algrithm
 
-	def openFolder(self, *param):
-		params= list(param)
+	def openFolder(self, param):
 		openF = QtGui.QFileDialog(self)
 		openF.setFileMode(QtGui.QFileDialog.Directory)
 		if openF.exec_(): 
 			folderDirPath= openF.selectedFiles()
-			if param[0] == "1":
+			if param == "1":
 				self.workingSavingDir= folderDirPath[0]
 				self.workingReadingDir= folderDirPath[0]
 				self.savingTextBox.setText(folderDirPath[0])
@@ -130,7 +134,7 @@ class Window(QtGui.QWidget):
 				self.treeWidget.clear()
 				self.loadTreeStructure(str(self.workingReadingDir), 
 					self.treeWidget)
-			elif param[0] == "2":
+			elif param == "2":
 				self.workingSavingDir= folderDirPath[0]
 				self.savingTextBox.setText(folderDirPath[0])
 
@@ -143,9 +147,9 @@ class Window(QtGui.QWidget):
 											[os.path.basename(file_path)])
 				if os.path.isdir(file_path):
 					self.loadTreeStructure(file_path, treeItem)
-					treeItem.setIcon(0, QtGui.QIcon("assets/forlder.ico"))
+					word= TruetreeItem.setIcon(0, QtGui.QIcon("folder.ico"))
 				else:
-					treeItem.setIcon(0, QtGui.QIcon("assets/file.ico"))
+					treeItem.setIcon(0, QtGui.QIcon("file.png"))
 		except:
 			pass
 			# Nada mas para evitar que no se muera
