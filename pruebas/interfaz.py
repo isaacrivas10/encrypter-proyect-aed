@@ -3,6 +3,7 @@
 import sys, os
 from PyQt4 import QtGui, QtCore, Qt
 from functools import partial
+from encrypter import Encrypter
 
 class Window(QtGui.QWidget):
 
@@ -14,6 +15,9 @@ class Window(QtGui.QWidget):
 		self.workingSavingDir= ""
 		self.password= "Password"
 		self.savePassword= False
+
+		self.cipher= Encrypter()
+		self.cipher.setKey(self.password)
 
 		self.setGeometry(350,200,700,350)
 		self.setWindowTitle("Python bad-Encripter")
@@ -101,25 +105,50 @@ class Window(QtGui.QWidget):
 		self.show()
 
 	def encript(self):
-		print 'Has encriptado %s con %s' % (self.workingSavingDir, 
-			self.currentAlgorithm)
+		path= str(self.workingReadingDir)
+		extractionPath= str(self.workingSavingDir)
+		if path == extractionPath:
+			self.cipher.encryptAllInPath(path= path, 
+				algorithm= self.currentAlgorithm)
+		else:
+			self.cipher.encryptAllInPath(path= path,
+			extractionPath= extractionPath,
+			algorithm= self.currentAlgorithm)
+		self.treeWidget.clear()
+		self.loadTreeStructure(str(self.workingReadingDir), 
+		self.treeWidget)
+		
+		
 		
 	def decript(self):
-		print 'Has desencriptado %s con %s' % (self.workingSavingDir, 
-			self.currentAlgorithm)
+		path= str(self.workingReadingDir)
+		extractionPath= str(self.workingSavingDir)
+		if path == extractionPath:
+			self.cipher.decryptAllInPath(path= path, 
+				algorithm= self.currentAlgorithm)
+		else:
+			self.cipher.decryptAllInPath(path= path,
+			extractionPath= extractionPath,
+			algorithm= self.currentAlgorithm)
+		self.treeWidget.clear()
+		self.loadTreeStructure(str(self.workingReadingDir), 
+		self.treeWidget)
+		
 
 	def savePasswordBool(self):
 		if self.passCheckBox.isChecked():
 			self.savePassword= True
 		else:
 			self.savePassword= False
-		print self.savePassword
+		print self.cipher.key
 
 	def setPassword(self, text):
 		self.password= unicode(self.passTextBox.text())
+		self.cipher.setKey(self.passTextBox.text())
 
 	def setEncriptionAlgorithm(self, algrithm):
-		self.currentAlgorithm= algrithm
+		self.cipher.currentAlgorithm= algrithm
+
 
 	def openFolder(self, param):
 		openF = QtGui.QFileDialog(self)
@@ -136,7 +165,7 @@ class Window(QtGui.QWidget):
 					self.treeWidget)
 			elif param == "2":
 				self.workingSavingDir= folderDirPath[0]
-				self.savingTextBox.setText(folderDirPath[0])
+				self.savingTextBox.setText(folderDirPath[0])				
 
 	def loadTreeStructure(self, path, treeWidget):
 		# Para cada cosa que exista en path
@@ -147,11 +176,11 @@ class Window(QtGui.QWidget):
 											[os.path.basename(file_path)])
 				if os.path.isdir(file_path):
 					self.loadTreeStructure(file_path, treeItem)
-					word= TruetreeItem.setIcon(0, QtGui.QIcon("folder.ico"))
+					word= treeItem.setIcon(0, QtGui.QIcon("folder.ico"))
 				else:
 					treeItem.setIcon(0, QtGui.QIcon("file.png"))
-		except:
-			pass
+		except Exception as e:
+			print e
 			# Nada mas para evitar que no se muera
 
 
@@ -160,4 +189,5 @@ def run():
 	GUI= Window()
 	sys.exit(app.exec_())
 
-run()
+if __name__ == '__main__':
+	run()
