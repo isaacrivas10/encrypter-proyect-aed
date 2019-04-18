@@ -6,20 +6,45 @@ import Crypto.Random as Random
 import Crypto.Hash.SHA256 as SHA256
 
 
+class Logger:
+
+	def __init__(self):
+		self.name= 'logger.txt'
+		self.file= None
+		self.openLog()
+
+	def openLog(self):
+		self.file= open(self.name, "w")
+
+	def logThis(self, *text):
+		text= list(text)
+		for t in text:
+			self.file.write(str(t))
+			self.file.write('\n')
+
+	def closeLog(self):
+		if self.file:
+			self.file.close()
+
+
 class Encrypter:
 
 	def __init__(self):
 		self.key= None
+		self.log = Logger()
 
 	def setKey(self, key):
 		newKey= SHA256.new(key)
 		self.key= newKey.digest()
 
 	def pad(self, string):
-		return string +  b"\0" * (AES.block_size - len(string) % AES.block_size)
+		#return string +  b"\0" * (AES.block_size - len(string) % AES.block_size)
+		length= AES.block_size - (len(string) % AES.block_size)
+		string += (chr(length))*length
+		return string
 
-	def encryptAES(self, file, path=None):
-		with open(file, "rb") as file:
+	def encryptAES(self, filePath, path=None):
+		with open(filePath, "rb") as file:
 			file_data= file.read()
 		
 		data= self.pad(file_data)
@@ -31,7 +56,7 @@ class Encrypter:
 			basename= os.path.basename(file.name)
 			f_name= os.path.join(path, basename+ '.enc')
 		else:
-			f_name= file.name + '.enc'
+			f_name= filePath + '.enc'
 		with open(f_name, "wb") as encFile:
 			encFile.write(cipherData)
 
@@ -39,15 +64,15 @@ class Encrypter:
 		with open(file, "rb") as encFile:
 			enc_data=  encFile.read()
 		
-		iv = enc_data[:AES.block_size]
+		iv = enc_data[:16]
 		AESCipher= AES.new(self.key, AES.MODE_CBC, iv)
 		decryted_data=  AESCipher.decrypt(enc_data[AES.block_size:])
-		
+		decryted_data= decryted_data[:-ord(decryted_data[-1])]
+
 		if path:
 			basename= os.path.basename(file.name)
 			f_name= os.path.join(path, '(DEC)'+basename[:-4])
 		else:
-
 			f_name= file[:-4]
 		with open(f_name, "wb") as decFile:
 			decFile.write(decryted_data)
@@ -85,5 +110,4 @@ class Encrypter:
 
 
 if __name__== '__main__':
-	dir_path = os.path.dirname(os.path.realpath(__file__))
-	print dir_path
+	pass
