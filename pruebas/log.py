@@ -15,11 +15,11 @@ class Logger:
 	def logThis(self, *argv, **kwargs):
 		text= list(argv)
 
-		if kwargs["takeTime"]:
+		if kwargs.get("takeTime"):
 				self.file.write(self.timer.now().strftime('%Y-%m-%d %H:%M:%S')+ '\t')
 		for t in text:
 			self.file.write(str(t))
-			if kwargs["jump"]:
+			if kwargs.get("jump"):
 				self.file.write('\n')
 		self.file.write('\n')
 

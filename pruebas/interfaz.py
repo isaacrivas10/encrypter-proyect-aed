@@ -3,7 +3,7 @@
 import sys, os
 from PyQt4 import QtGui, QtCore, Qt
 from functools import partial
-from encrypter import Encrypter
+from encrypter import AESEncryptor, BlowfishEncryptor, Caller
 
 class Window(QtGui.QWidget):
 
@@ -16,8 +16,13 @@ class Window(QtGui.QWidget):
 		self.password= "Password"
 		self.savePassword= False
 
-		self.cipher= Encrypter()
-		self.cipher.setKey(self.password)
+		self.caller= Caller()
+
+		self.AEScipher= AESEncryptor()
+		self.AEScipher.setKey(self.password)
+
+		self.BFcipher= BlowfishEncryptor()
+		self.BFcipher.setKey(self.password)
 
 		self.setGeometry(350,200,700,350)
 		self.setWindowTitle("Python bad-Encripter")
@@ -30,7 +35,7 @@ class Window(QtGui.QWidget):
 		# ComboBox para seleccion de algoritmos
 		comboBox= QtGui.QComboBox(self)
 		comboBox.addItem("AES256")
-		comboBox.addItem("Algoritmo")
+		comboBox.addItem("Blowfish")
 		
 
 		# TextBox para el almacenamiento de direcciones
@@ -108,12 +113,15 @@ class Window(QtGui.QWidget):
 		path= str(self.workingReadingDir)
 		extractionPath= str(self.workingSavingDir)
 		if path == extractionPath:
-			self.cipher.encryptAllInPath(path= path, 
-				algorithm= self.currentAlgorithm)
+			self.caller.encrypt(path= path, 
+				algorithm= self.currentAlgorithm,
+				key= self.password)
+			#self.AEScipher.encryptAllInPath(path= path)
 		else:
 			self.cipher.encryptAllInPath(path= path,
 			extractionPath= extractionPath,
-			algorithm= self.currentAlgorithm)
+			algorithm= self.currentAlgorithm,
+			key= self.password)
 		self.treeWidget.clear()
 		self.loadTreeStructure(str(self.workingReadingDir), 
 		self.treeWidget)
@@ -124,12 +132,19 @@ class Window(QtGui.QWidget):
 		path= str(self.workingReadingDir)
 		extractionPath= str(self.workingSavingDir)
 		if path == extractionPath:
-			self.cipher.decryptAllInPath(path= path, 
-				algorithm= self.currentAlgorithm)
+			self.caller.decrypt(path= path, 
+				algorithm= self.currentAlgorithm,
+				key= self.password)
+			# self.cipher.decryptAllInPath(path= path, 
+			# 	algorithm= self.currentAlgorithm)
 		else:
-			self.cipher.decryptAllInPath(path= path,
+			self.caller.decrypt(path= path,
 			extractionPath= extractionPath,
-			algorithm= self.currentAlgorithm)
+			algorithm= self.currentAlgorithm,
+			key=self.password)
+			# self.cipher.decryptAllInPath(path= path,
+			# extractionPath= extractionPath,
+			# algorithm= self.currentAlgorithm)
 		self.treeWidget.clear()
 		self.loadTreeStructure(str(self.workingReadingDir), 
 		self.treeWidget)
@@ -144,10 +159,9 @@ class Window(QtGui.QWidget):
 
 	def setPassword(self, text):
 		self.password= unicode(self.passTextBox.text())
-		self.cipher.setKey(self.passTextBox.text())
-
+		
 	def setEncriptionAlgorithm(self, algrithm):
-		self.cipher.currentAlgorithm= algrithm
+		self.currentAlgorithm= algrithm
 
 
 	def openFolder(self, param):
@@ -180,11 +194,12 @@ class Window(QtGui.QWidget):
 				else:
 					treeItem.setIcon(0, QtGui.QIcon("file.png"))
 		except Exception as e:
-			print e
+			print 'Exception: ', e
 			# Nada mas para evitar que no se muera
 
 	def closeEvent(self, event):
-		self.cipher.log.closeLog()
+		#self.cipher.log.closeLog()
+		event.accept()
 
 
 def run():
