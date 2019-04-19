@@ -4,28 +4,7 @@ import os
 import Crypto.Cipher.AES as AES
 import Crypto.Random as Random
 import Crypto.Hash.SHA256 as SHA256
-
-
-class Logger:
-
-	def __init__(self):
-		self.name= 'logger.txt'
-		self.file= None
-		self.openLog()
-
-	def openLog(self):
-		self.file= open(self.name, "w")
-
-	def logThis(self, *text):
-		text= list(text)
-		for t in text:
-			self.file.write(str(t))
-			self.file.write('\n')
-
-	def closeLog(self):
-		if self.file:
-			self.file.close()
-
+from log import Logger
 
 class Encrypter:
 
@@ -80,23 +59,29 @@ class Encrypter:
 	def encryptAllInPath(self, path, algorithm, 
 		extractionPath=None):
 		dirs= self.getAllFiles(path)
+		self.log.openLog()
+		self.log.logThis("Encriptando todo en: ", path, takeTime= True, jump= False)
 		for file in dirs:
-			print "Encriptando:  ", file
+			self.log.logThis("Desencriptando: ", file,takeTime=False, jump= False)
 			if algorithm == 'AES256':
 				self.encryptAES(str(file), extractionPath)
 			else:
 				pass
+		self.log.closeLog()
 
 	def decryptAllInPath(self, path, algorithm,
 		extractionPath= None):
 		dirs= self.getAllFiles(path)
+		self.log.openLog()
+		self.log.logThis("Desencriptando todo en: ",path, takeTime= True, jump= False)
 		for file in dirs:
 			if file[-4:] == '.enc':
-				print "Desencriptando:  ", file
+				self.log.logThis("Desencriptando: ", file, takeTime=False, jump= False)
 				if algorithm == "AES256":
 					self.decryptAES(str(file), extractionPath)
 				else:
 					pass
+		self.log.closeLog()
 		
 	def getAllFiles(self, dir_path):
 		dirs = []

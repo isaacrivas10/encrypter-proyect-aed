@@ -183,6 +183,9 @@ class Window(QtGui.QWidget):
 			print e
 			# Nada mas para evitar que no se muera
 
+	def closeEvent(self, event):
+		self.cipher.log.closeLog()
+
 
 def run():
 	app= QtGui.QApplication(sys.argv)
