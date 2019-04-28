@@ -18,18 +18,18 @@ class Caller:
 
 		if algorithm == "AES256":
 			self.aes.setKey(key)
-			self.aes.encryptAllInPath(path, extractionPath)
+			self.aes.encryptAllInPath(path, algorithm, extractionPath)
 		else:
 			self.bf.setKey(key)
-			self.bf.encryptAllInPath(path, extractionPath)
+			self.bf.encryptAllInPath(path, algorithm, extractionPath)
 
 	def decrypt(self, key, algorithm, path, extractionPath= None):
 		if algorithm == "AES256":
 			self.aes.setKey(key)
-			self.aes.decryptAllInPath(path, extractionPath)
+			self.aes.decryptAllInPath(path, algorithm, extractionPath)
 		else:
 			self.bf.setKey(key)
-			self.bf.decryptAllInPath(path, extractionPath)
+			self.bf.decryptAllInPath(path, algorithm, extractionPath)
 
 
 class BaseEncryptor(object):
@@ -46,26 +46,24 @@ class BaseEncryptor(object):
 
 		return dirs
 
-	def encryptAllInPath(self, path, extractionPath=None):
+	def encryptAllInPath(self, path, algorithm, extractionPath=None):
 		dirs= self.getAllFiles(path)
 		self.log.openLog()
-		#self.log.logThis("\tAES256 algorithm", takeTime= True, jump= False)
-		print 'Enc'
-		self.log.logThis("Encriptando todo en: ", path, takeTime= False)
+		self.log.logThis("Encriptando con ", algorithm, takeTime= True)
+		self.log.logThis("Path: ", path, "\n")
 		if len(dirs) > 0:
 			for file in dirs:
-				self.log.logThis("Desencriptando: ", file)
+				self.log.logThis("Encriptando: ", file)
 				self.encrypt(str(file), extractionPath)
 		else:
 			self.log.logThis("Esta vacio")
 		self.log.closeLog()
 
-	def decryptAllInPath(self, path, extractionPath= None):
+	def decryptAllInPath(self, path, algorithm, extractionPath= None):
 		dirs= self.getAllFiles(path)
 		self.log.openLog()
-		#self.log.logThis("\tAES256 algorithm", takeTime= False, jump= False)
-		print 'Dec'
-		self.log.logThis("Desencriptando todo en: ",path, takeTime= True)
+		self.log.logThis("\t Desencriptando con ", algorithm, takeTime= True)
+		self.log.logThis("Path: ",path, "\n")
 		if len(dirs) > 0:
 			for file in dirs:
 				if file[-4:] == '.enc':

@@ -11,7 +11,7 @@ class Logger:
 		self.file= open(self.name, "a")
 		self.file.write('\n')
 
-	# Param 0 = jump, 1= takeTime, 3+
+	# Param 0 = jump, 1= takeTime, 3+ texto
 	def logThis(self, *argv, **kwargs):
 		text= list(argv)
 

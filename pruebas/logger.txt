@@ -1,30 +1,6 @@
 
-Encriptando todo en: /home/drunkenboy_/python2/3parcial/pruebas/graphs
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/g.html
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/g.py
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/gsearch.py
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/haha/hehe.js
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/haha/hola.txt
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/haha/hehe/e.py
-
-2019-04-19 14:57:20	Desencriptando todo en: /home/drunkenboy_/python2/3parcial/pruebas/graphs
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/g.html.enc
-
-2019-04-19 14:55:57	Desencriptando todo en: /home/drunkenboy_/python2/3parcial/pruebas/graphs
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/g.html.enc
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/gsearch.py.enc
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/g.py.enc
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/haha/hehe.js.enc
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/haha/hola.txt.enc
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/haha/hehe/e.py.enc
-
-2019-04-19 14:58:03	Desencriptando todo en: /home/drunkenboy_/python2/3parcial/pruebas/graphs
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/g.html.enc
-
-2019-04-19 15:01:18	Desencriptando todo en: /home/drunkenboy_/python2/3parcial/pruebas/graphs
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/g.html.enc
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/gsearch.py.enc
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/g.py.enc
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/haha/hehe.js.enc
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/haha/hola.txt.enc
-Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/graphs/haha/hehe/e.py.enc
+2019-04-26 21:39:34		 Encriptando con AES256
+Path: /home/drunkenboy_/python2/3parcial/pruebas/ENC
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/ENC/g.html
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/ENC/g.py
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/ENC/gsearch.py
