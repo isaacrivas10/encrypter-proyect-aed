@@ -116,22 +116,22 @@ class Window(QtGui.QWidget):
 			self.caller.encrypt(path= self.path, 
 				algorithm= self.currentAlgorithm,
 				key= self.password)
+			self.treeWidget.clear()
+			self.treeConstructor(self.path)
 		else:
 			self.caller.encrypt(path= self.path,
 			extraction= [extractionPath, self.tree],
 			algorithm= self.currentAlgorithm,
 			key= self.password)
-		self.treeWidget.clear()
-		# self.loadTreeStructure(str(self.workingReadingDir), 
-		# self.treeWidget)
-				
-		
+						
 	def decrypt(self):
 		extractionPath= str(self.workingSavingDir)
 		if extractionPath in (self.path[1][0]):
 			self.caller.decrypt(path= self.path, 
 				algorithm= self.currentAlgorithm,
 				key= self.password)
+			self.treeWidget.clear()
+			self.treeConstructor(self.path)
 		else:
 			self.caller.decrypt(path= self.path,
 				extraction= [extractionPath, self.tree],
@@ -174,32 +174,7 @@ class Window(QtGui.QWidget):
 				self.readingTextBox.setText(self.workingReadingDir)
 				self.treeWidget.clear()
 
-				if len(output[1]) is 1:
-					path= output[1][0]
-					if output[0] is "folder":
-						rootName= os.path.basename(path)
-					else:
-						rootName= os.path.basename(os.path.dirname(path))
-					
-					self.tree= Arbol(rootName)
-					if output[0] == "folder":
-						self.buildTree(path=path, tree=self.tree)
-					else:
-						self.buildTree(tree=self.tree, rootChilds=output)
-
-				else:
-					#crear arbol con las hijos en root
-					rootName= os.path.basename(os.path.dirname(output[1][0]))
-					
-					self.tree= Arbol(rootName)
-					self.buildTree(tree=self.tree, rootChilds=output)
-				
-				self.tree.currentNode= self.tree.root
-				self.LoadTreeStructure(self.tree, self.treeWidget)
-				self.tree.currentNode= self.tree.root
-				self.saveTree(self.tree)
-				self.tree.currentNode= self.tree.root
-
+				self.treeConstructor(output)
 			else:
 				msg= QtGui.QMessageBox()
 				msg.setIcon(QtGui.QMessageBox.Warning)
@@ -214,6 +189,34 @@ class Window(QtGui.QWidget):
 			output= openF.getFiles()
 			self.workingSavingDir= output[1][0]
 			self.savingTextBox.setText(output[1][0])
+
+	def treeConstructor(self, output):
+
+		if len(output[1]) is 1:
+			path= output[1][0]
+			if output[0] is "folder":
+				rootName= os.path.basename(path)
+			else:
+				rootName= os.path.basename(os.path.dirname(path))
+			
+			self.tree= Arbol(rootName)
+			if output[0] == "folder":
+				self.buildTree(path=path, tree=self.tree)
+			else:
+				self.buildTree(tree=self.tree, rootChilds=output)
+
+		else:
+			#crear arbol con las hijos en root
+			rootName= os.path.basename(os.path.dirname(output[1][0]))
+			
+			self.tree= Arbol(rootName)
+			self.buildTree(tree=self.tree, rootChilds=output)
+		
+		self.tree.currentNode= self.tree.root
+		self.LoadTreeStructure(self.tree, self.treeWidget)
+		self.tree.currentNode= self.tree.root
+		self.saveTree(self.tree)
+		self.tree.currentNode= self.tree.root
 
 	def LoadTreeStructure(self, tree, treeWidget):
 		#Busa archivos en el arbol recursivamente

@@ -78,7 +78,7 @@ class BaseEncryptor(object):
 				st = os.path.join(string,node.getName())
 				tree.currentNode= node
 				self.buildPathsFromTree(tree, st, arreglo)
-				#arreglo.append(st)
+				tree.currentNode= node
 			else:
 				st= os.path.join(string, node.getName())
 				arreglo.append(st)
@@ -94,14 +94,11 @@ class BaseEncryptor(object):
 			array= []
 			self.buildPathsFromTree(extractionPath[1], extractionPath[0],array)
 			for file in array:
-				# self.log.logThis("Encriptando: ", file)
-				# if os.path.exists(os.path.dirname(file)):
-				# 	print "Existe:", file
-				# else:
-				# 	print "Creando:", os.path.dirName(file)
-				# 	os.makedirs(os.path.dirname(file))
-				# [self.encrypt(f, file) for f in dirs if os.path.basename(file) == f]
-				print file
+				if os.path.exists(os.path.dirname(file)):
+					continue
+				else:
+					os.makedirs(os.path.dirname(file))
+			[[self.log.logThis("Encriptando: ", f),self.encrypt(f,file)] for file in array for f in dirs if os.path.basename(file) == os.path.basename(f)]
 		else:
 			for p in path:
 				dirs = self.getAllFiles(p)
@@ -114,18 +111,31 @@ class BaseEncryptor(object):
 		self.log.closeLog()
 
 	def decryptAllInPath(self, path, algorithm, extractionPath= None):
-		dirs= self.getAllFiles(path)
 		self.log.openLog()
 		self.log.logThis("\t Desencriptando con ", algorithm, takeTime= True)
 		self.log.logThis("Path: ",path, "\n")
-		if len(dirs) > 0:
-			for file in dirs:
-				if file[-4:] == '.enc':
-					self.log.logThis("Desencriptando: ", file)
-					self.decrypt(str(file), extractionPath)
-		else:
-			self.log.logThis("Esta vacio")
-			self.log.closeLog()
+
+		# if extractionPath:
+		# 	dirs= [x for o in path for x in self.getAllFiles(o)]
+		# 	array= []
+		# 	self.buildPathsFromTree(extractionPath[1], extractionPath[0],array)
+		# 	for file in array:
+		# 		if os.path.exists(os.path.dirname(file)):
+		# 			continue
+		# 		else:
+		# 			os.makedirs(os.path.dirname(file))
+		# 	[[self.log.logThis("Encriptando: ", f),self.encrypt(f,file)] for file in array for f in dirs if os.path.basename(file) == os.path.basename(f)]
+
+		for p in path:
+			dirs= self.getAllFiles(p)
+			if len(dirs) > 0:
+				for file in dirs:
+					if file[-4:] == '.enc':
+						self.log.logThis("Desencriptando: ", file)
+						self.decrypt(file, extractionPath)
+			else:
+				self.log.logThis("Esta vacio")
+		self.log.closeLog()
 
 	def encryptThisFiles(self, path, algorithm, extractionPath= None):
 		self.log.openLog()
@@ -154,7 +164,7 @@ class BaseEncryptor(object):
 		return data
 
 	def writeFileBytes(self, filename, bufferedData):
-		foo= open(filename, 'wb')
+		foo= open(filename, 'wb+')
 		foo.write(bufferedData)
 		foo.close()
 
@@ -181,8 +191,7 @@ class AESEncryptor(BaseEncryptor):
 		cipherData= iv + AESCipher.encrypt(data)
 		
 		if path:
-			basename= os.path.basename(file.name)
-			f_name= os.path.join(path, basename+ '.enc')
+			f_name= path+'.enc'
 		else:
 			f_name= filePath + '.enc'
 
@@ -197,8 +206,8 @@ class AESEncryptor(BaseEncryptor):
 		decryted_data= decryted_data[:-ord(decryted_data[-1])]
 
 		if path:
-			basename= os.path.basename(file.name)
-			f_name= os.path.join(path, '(DEC)'+basename[:-4])
+			basename= os.path.basename(file)
+			f_name= path[0].strip(basename) +'/(DEC)'+basename[:-4]
 		else:
 			f_name= file[:-4]
 		
@@ -220,8 +229,7 @@ class BlowfishEncryptor(BaseEncryptor):
 		cipherData= BFcipher.encrypt(self.pad(file_data))
 
 		if path:
-			basename= os.path.basename(file.name)
-			f_name= os.path.join(path, basename+ '.enc')
+			f_name= path + '.enc'
 		else:
 			f_name= filePath + '.enc'
 
@@ -234,8 +242,8 @@ class BlowfishEncryptor(BaseEncryptor):
 		decryted_data= self.depad(BFcipher.decrypt(enc_data))
 
 		if path:
-			basename= os.path.basename(file.name)
-			f_name= os.path.join(path, '(DEC)'+basename[:-4])
+			basename= os.path.basename(filePath)
+			f_name= path[0].strip(basename) +'/(DEC)'+basename[:-4]
 		else:
 			f_name= filePath[:-4]
 		
