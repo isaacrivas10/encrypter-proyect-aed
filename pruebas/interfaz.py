@@ -249,24 +249,26 @@ class Window(QtGui.QWidget):
 					tree.root.getValue().add(node)
 					tree.currentNode= node
 					self.buildTree(tree=tree, path=path)
-				for file in os.listdir(path):
-					node= tree.currentNode #Guardamos el node original
-					print "Buscando en ",path,"..."
-					file_path= path + '/' + file
-					if os.path.isdir(file_path):
-						print "Carpeta:",file,"Direccion:",file_path
-						nodoNuevo=Node(Carpeta(file))#creo el nodo de tipo carpeta y nombre file
-						tree.add(nodoNuevo)#agrega al currentNode del arbol
-						print file,"agregado a", tree.currentNode.getName()
-						tree.currentNode= nodoNuevo
-						print "currentNode:",tree.currentNode.getName()
-						self.buildTree(path=file_path, tree=tree)
-						tree.currentNode= node
-						print "currentNode:",tree.currentNode.getName()
-					else:
-						print "Archivo:",file,"Direccion:",file_path
-						nodoNuevo=Node(Archivo(file))
-						tree.add(nodoNuevo)
+				else:
+					for file in os.listdir(path):
+						node= tree.currentNode #Guardamos el node original
+						print "Buscando..."
+						file_path= path + '/' + file
+						if os.path.isdir(file_path):
+							print "Carpeta:",file,"Direccion:",file_path
+							nodoNuevo=Node(Carpeta(file))#creo el nodo de tipo carpeta y nombre file
+							tree.add(nodoNuevo)#agrega al currentNode del arbol
+							print file,"agregado a", tree.currentNode.getName()
+							tree.currentNode= nodoNuevo
+							print "currentNode:",tree.currentNode.getName()
+							self.buildTree(path=file_path, tree=tree)
+							print "Busqueda finalizada en", tree.currentNode.getName()
+							tree.currentNode= node
+							print "currentNode:",tree.currentNode.getName()
+						else:
+							print "Archivo:",file,"Direccion:",file_path
+							nodoNuevo=Node(Archivo(file))
+							tree.add(nodoNuevo)
 			if rootChilds:
 				print "Root childs: ", rootChilds
 				if rootChilds[0] is "folder":
