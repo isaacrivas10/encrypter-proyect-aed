@@ -25,9 +25,11 @@ class Window(QtGui.QWidget):
 		self.path= None
 
 		self.setGeometry(350,200,700,350)
-		self.setWindowTitle("Python bad-Encripter")
+		self.setWindowTitle("Python Encrypter")
+		self.setWindowIcon(QtGui.QIcon("123.jpg"))
 		QtGui.QApplication.setStyle(QtGui.QStyleFactory.create(
 			'Plastique'))
+		self.setStyleSheet("background:#928a37")
 
 		self.home()
 
@@ -36,6 +38,8 @@ class Window(QtGui.QWidget):
 		comboBox= QtGui.QComboBox(self)
 		comboBox.addItem("AES256")
 		comboBox.addItem("Blowfish")
+		#color
+		comboBox.setStyleSheet("background:#c98828")
 		
 
 		# TextBox para el almacenamiento de direcciones
@@ -45,6 +49,8 @@ class Window(QtGui.QWidget):
 		self.savingTextBox= QtGui.QLineEdit(self)
 		self.savingTextBox.resize(350,35)
 		self.savingTextBox.setEnabled(False)
+		self.readingTextBox.setStyleSheet("background:#f7f3cd")
+		self.savingTextBox.setStyleSheet("background:#f7f3cd") 
 		self.readingTextBox.setText("Direccion a cifrar")
 		self.savingTextBox.setText("Almacenamiento de cifrado")
 
@@ -54,30 +60,37 @@ class Window(QtGui.QWidget):
 		self.passTextBox.setText("Password")
 		self.passTextBox.textChanged[str].connect(self.setPassword)
 		self.passTextBox.resize(30, 10)
+		self.passTextBox.setStyleSheet("background: white")
 
 		self.passCheckBox= QtGui.QCheckBox(u"Guardar Contraseña", self)
 		self.passCheckBox.stateChanged.connect(self.savePasswordBool)
+		self.passCheckBox.setStyleSheet("background: #d4f0f9")
 
 		# Definicion de botones
 		readingDirBtn= QtGui.QPushButton(u'\u25bc', self)
 		readingDirBtn.clicked.connect(partial(self.openFolder, "1"))
 		readingDirBtn.resize(readingDirBtn.minimumSizeHint())
+		readingDirBtn.setStyleSheet("background:#c98828")
 
 		savingDirBtn= QtGui.QPushButton(u'\u25bc', self)
 		savingDirBtn.clicked.connect(partial(self.openFolder, "2"))
 		savingDirBtn.resize(savingDirBtn.minimumSizeHint())
+		savingDirBtn.setStyleSheet("background:#c98828")
 
 		encryptBtn= QtGui.QPushButton("Cifrar", self)
 		encryptBtn.clicked.connect(self.encrypt)
 		encryptBtn.resize(encryptBtn.minimumSizeHint())
+		encryptBtn.setStyleSheet("background:#fd9a08")
 		
 		decryptBtn= QtGui.QPushButton("Descifrar", self)
 		decryptBtn.clicked.connect(self.decrypt)
 		decryptBtn.resize(decryptBtn.minimumSizeHint())
+		decryptBtn.setStyleSheet("background:#fd9a08")
 
 		# Definicion del Tree de directorios
 		self.treeWidget= QtGui.QTreeWidget(self)
 		self.treeWidget.setHeaderLabels(QtCore.QStringList("Directorios"))
+		self.treeWidget.setStyleSheet("background:#f7f3cd")
 
 		# Definicion del Layout de la Ventana
 		gridLayout= QtGui.QGridLayout()
