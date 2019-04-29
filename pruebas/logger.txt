@@ -246,3 +246,13 @@ Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/perfomancesimulator/p
 Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/perfomancesimulator/perfomancesimulator.py.enc
 Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/perfomancesimulator/python.html.enc
 Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/perfomancesimulator/t.html.enc
+
+2019-04-29 12:11:33	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/enc.py']
+
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/enc.py
+
+2019-04-29 12:13:24	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/enc.py']
+
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/enc.py

@@ -144,7 +144,7 @@ class BaseEncryptor(object):
 
 		for p in path:
 			self.log.logThis("Encriptando: ", p)
-			self.encrypt(p, extractionPath)
+			self.encrypt(p, extractionPath[0])
 		self.log.closeLog()
 
 	def decryptThisFiles(self, path, algorithm, extractionPath= None):
@@ -154,7 +154,7 @@ class BaseEncryptor(object):
 		
 		for p in path:
 			self.log.logThis("Desencriptando: ", p)
-			self.decrypt(p, extractionPath)
+			self.decrypt(p, extractionPath[0])
 		self.log.closeLog()
 
 	def readFileBytes(self, filename):
