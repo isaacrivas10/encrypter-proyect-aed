@@ -14,22 +14,43 @@ class Caller:
 		self.aes= AESEncryptor()
 		self.bf= BlowfishEncryptor()
 
-	def encrypt(self, key, algorithm, path, extractionPath= None):
+	def encrypt(self, key, algorithm, path, extraction= None):
+		
+		if path[0] is "folder":
+			if algorithm == "AES256":
 
-		if algorithm == "AES256":
-			self.aes.setKey(key)
-			self.aes.encryptAllInPath(path, algorithm, extractionPath)
-		else:
-			self.bf.setKey(key)
-			self.bf.encryptAllInPath(path, algorithm, extractionPath)
+				self.aes.setKey(key)
+				self.aes.encryptAllInPath(path[1], algorithm, extraction)
+			else:
+				self.bf.setKey(key)
+				self.bf.encryptAllInPath(path[1], algorithm, extraction)
+		else: 
+			if algorithm == "AES256":
 
-	def decrypt(self, key, algorithm, path, extractionPath= None):
-		if algorithm == "AES256":
-			self.aes.setKey(key)
-			self.aes.decryptAllInPath(path, algorithm, extractionPath)
-		else:
-			self.bf.setKey(key)
-			self.bf.decryptAllInPath(path, algorithm, extractionPath)
+				self.aes.setKey(key)
+				self.aes.encryptThisFiles(path[1], algorithm,extraction)
+			else:
+				self.bf.setKey(key)
+				self.bf.encryptThisFiles(path[1], algorithm,extraction)
+
+	def decrypt(self, key, algorithm, path, extraction= None):
+		if path[0] is "folder":
+			if algorithm == "AES256":
+
+				self.aes.setKey(key)
+				self.aes.decryptAllInPath(path[1], algorithm, extraction)
+			else:
+				self.bf.setKey(key)
+				self.bf.decryptAllInPath(path[1], algorithm, extraction)
+		else: 
+			if algorithm == "AES256":
+
+				self.aes.setKey(key)
+				self.aes.decryptThisFiles(path[1], algorithm,extraction)
+			else:
+				self.bf.setKey(key)
+				self.bf.decryptThisFiles(path[1], algorithm,extraction)
+
 
 
 class BaseEncryptor(object):
@@ -46,17 +67,50 @@ class BaseEncryptor(object):
 
 		return dirs
 
+	
+	def buildPathsFromTree(self, tree, string, arreglo):
+
+		#Busca archivos en el arbol recursivamente
+		#Suponiendo que el root es el currentNode
+		node= tree.currentNode.value.branches.first
+		while node:
+			if node.type()== "Carpeta":
+				st = os.path.join(string,node.getName())
+				tree.currentNode= node
+				self.buildPathsFromTree(tree, st, arreglo)
+				#arreglo.append(st)
+			else:
+				st= os.path.join(string, node.getName())
+				arreglo.append(st)
+			node= node.next
+
+
 	def encryptAllInPath(self, path, algorithm, extractionPath=None):
-		dirs= self.getAllFiles(path)
 		self.log.openLog()
 		self.log.logThis("Encriptando con ", algorithm, takeTime= True)
 		self.log.logThis("Path: ", path, "\n")
-		if len(dirs) > 0:
-			for file in dirs:
-				self.log.logThis("Encriptando: ", file)
-				self.encrypt(str(file), extractionPath)
+		if extractionPath:
+			dirs= [x for o in path for x in self.getAllFiles(o)]
+			array= []
+			self.buildPathsFromTree(extractionPath[1], extractionPath[0],array)
+			for file in array:
+				# self.log.logThis("Encriptando: ", file)
+				# if os.path.exists(os.path.dirname(file)):
+				# 	print "Existe:", file
+				# else:
+				# 	print "Creando:", os.path.dirName(file)
+				# 	os.makedirs(os.path.dirname(file))
+				# [self.encrypt(f, file) for f in dirs if os.path.basename(file) == f]
+				print file
 		else:
-			self.log.logThis("Esta vacio")
+			for p in path:
+				dirs = self.getAllFiles(p)
+				if len(dirs) > 0:
+					for file in dirs:
+						self.log.logThis("Encriptando: ", file)
+						self.encrypt(file, extractionPath)
+				else:
+					self.log.logThis("Esta vacio")
 		self.log.closeLog()
 
 	def decryptAllInPath(self, path, algorithm, extractionPath= None):
@@ -72,6 +126,26 @@ class BaseEncryptor(object):
 		else:
 			self.log.logThis("Esta vacio")
 			self.log.closeLog()
+
+	def encryptThisFiles(self, path, algorithm, extractionPath= None):
+		self.log.openLog()
+		self.log.logThis("Encriptando con ", algorithm, takeTime= True)
+		self.log.logThis("Path: ", path, "\n")
+
+		for p in path:
+			self.log.logThis("Encriptando: ", p)
+			self.encrypt(p, extractionPath)
+		self.log.closeLog()
+
+	def decryptThisFiles(self, path, algorithm, extractionPath= None):
+		self.log.openLog()
+		self.log.logThis("\t Desencriptando con ", algorithm, takeTime= True)
+		self.log.logThis("Path: ", path, "\n")
+		
+		for p in path:
+			self.log.logThis("Desencriptando: ", p)
+			self.decrypt(p, extractionPath)
+		self.log.closeLog()
 
 	def readFileBytes(self, filename):
 		foo= open(filename, 'rb')

@@ -22,6 +22,7 @@ class Window(QtGui.QWidget):
 		self.caller= Caller()
 
 		self.tree= None
+		self.path= None
 
 		self.setGeometry(350,200,700,350)
 		self.setWindowTitle("Python bad-Encripter")
@@ -66,13 +67,13 @@ class Window(QtGui.QWidget):
 		savingDirBtn.clicked.connect(partial(self.openFolder, "2"))
 		savingDirBtn.resize(savingDirBtn.minimumSizeHint())
 
-		encriptBtn= QtGui.QPushButton("Cifrar", self)
-		encriptBtn.clicked.connect(self.encript)
-		encriptBtn.resize(encriptBtn.minimumSizeHint())
+		encryptBtn= QtGui.QPushButton("Cifrar", self)
+		encryptBtn.clicked.connect(self.encrypt)
+		encryptBtn.resize(encryptBtn.minimumSizeHint())
 		
-		decriptBtn= QtGui.QPushButton("Descifrar", self)
-		decriptBtn.clicked.connect(self.decript)
-		decriptBtn.resize(decriptBtn.minimumSizeHint())
+		decryptBtn= QtGui.QPushButton("Descifrar", self)
+		decryptBtn.clicked.connect(self.decrypt)
+		decryptBtn.resize(decryptBtn.minimumSizeHint())
 
 		# Definicion del Tree de directorios
 		self.treeWidget= QtGui.QTreeWidget(self)
@@ -93,8 +94,8 @@ class Window(QtGui.QWidget):
 
 		gridLayout.addWidget(comboBox, 3, 1)
 		
-		gridLayout.addWidget(encriptBtn, 6,1)
-		gridLayout.addWidget(decriptBtn, 7,1)
+		gridLayout.addWidget(encryptBtn, 6,1)
+		gridLayout.addWidget(decryptBtn, 7,1)
 
 		gridLayout.addWidget(self.passTextBox, 4, 1, 1, 2)
 		gridLayout.addWidget(self.passCheckBox, 5, 1)
@@ -108,41 +109,34 @@ class Window(QtGui.QWidget):
 		
 		self.show()
 
-	def encript(self):
-		path= self.workingReadingDir.split(";")
-
+	def encrypt(self):
+		
 		extractionPath= str(self.workingSavingDir)
-		if path == extractionPath:
-			self.caller.encrypt(path= path, 
+		if extractionPath in (self.path[1][0]):
+			self.caller.encrypt(path= self.path, 
 				algorithm= self.currentAlgorithm,
 				key= self.password)
 		else:
-			self.cipher.encryptAllInPath(path= path,
-			extractionPath= extractionPath,
+			self.caller.encrypt(path= self.path,
+			extraction= [extractionPath, self.tree],
 			algorithm= self.currentAlgorithm,
 			key= self.password)
 		self.treeWidget.clear()
-		self.loadTreeStructure(str(self.workingReadingDir), 
-		self.treeWidget)
+		# self.loadTreeStructure(str(self.workingReadingDir), 
+		# self.treeWidget)
+				
 		
-		
-		
-	def decript(self):
-		path= str(self.workingReadingDir)
+	def decrypt(self):
 		extractionPath= str(self.workingSavingDir)
-		if path == extractionPath:
-			self.caller.decrypt(path= path, 
+		if extractionPath in (self.path[1][0]):
+			self.caller.decrypt(path= self.path, 
 				algorithm= self.currentAlgorithm,
 				key= self.password)
 		else:
-			self.caller.decrypt(path= path,
-			extractionPath= extractionPath,
-			algorithm= self.currentAlgorithm,
-			key=self.password)
-		self.treeWidget.clear()
-		self.loadTreeStructure(str(self.workingReadingDir), 
-		self.treeWidget)
-		
+			self.caller.decrypt(path= self.path,
+				extraction= [extractionPath, self.tree],
+				algorithm= self.currentAlgorithm,
+				key= self.password)
 
 	def savePasswordBool(self):
 		if self.passCheckBox.isChecked():
@@ -165,6 +159,7 @@ class Window(QtGui.QWidget):
 		if param == "1":
 			openF.exec_()
 			output= openF.getFiles()
+			self.path= output
 
 			if output is not True:
 				if len(output[1]) is 1 and output[0] is "folder":
@@ -184,12 +179,19 @@ class Window(QtGui.QWidget):
 					if output[0] is "folder":
 						rootName= os.path.basename(path)
 					else:
-						rootName= os.path.dirname(path)
+						rootName= os.path.basename(os.path.dirname(path))
+					
 					self.tree= Arbol(rootName)
-					self.buildTree(path=path, tree=self.tree)
+					if output[0] == "folder":
+						self.buildTree(path=path, tree=self.tree)
+					else:
+						self.buildTree(tree=self.tree, rootChilds=output)
+
 				else:
 					#crear arbol con las hijos en root
-					self.tree= Arbol(os.path.dirname(output[1][0]))
+					rootName= os.path.basename(os.path.dirname(output[1][0]))
+					
+					self.tree= Arbol(rootName)
 					self.buildTree(tree=self.tree, rootChilds=output)
 				
 				self.tree.currentNode= self.tree.root
@@ -216,7 +218,7 @@ class Window(QtGui.QWidget):
 	def LoadTreeStructure(self, tree, treeWidget):
 		#Busa archivos en el arbol recursivamente
 		#Suponiendo que el root es el currentNode
-		print "Vengo de ", tree.currentNode.getName()
+		#print "Vengo de ", tree.currentNode.getName()
 		node= tree.currentNode.value.branches.first
 
 		while node:
@@ -239,29 +241,42 @@ class Window(QtGui.QWidget):
 	def buildTree(self, tree, path=None, rootChilds=None, _rootNode=False):
 		try:
 			if path:
+				print "Estoy en ", path
 				if _rootNode:
+					print "root node:", os.path.basename(path) 
 					# Si True significa que este path es un nodo hijo de root
 					node= Node(Carpeta(os.path.basename(path)))
 					tree.root.getValue().add(node)
 					tree.currentNode= node
 					self.buildTree(tree=tree, path=path)
 				for file in os.listdir(path):
+					node= tree.currentNode #Guardamos el node original
+					print "Buscando en ",path,"..."
 					file_path= path + '/' + file
 					if os.path.isdir(file_path):
+						print "Carpeta:",file,"Direccion:",file_path
 						nodoNuevo=Node(Carpeta(file))#creo el nodo de tipo carpeta y nombre file
 						tree.add(nodoNuevo)#agrega al currentNode del arbol
+						print file,"agregado a", tree.currentNode.getName()
 						tree.currentNode= nodoNuevo
+						print "currentNode:",tree.currentNode.getName()
 						self.buildTree(path=file_path, tree=tree)
+						tree.currentNode= node
+						print "currentNode:",tree.currentNode.getName()
 					else:
+						print "Archivo:",file,"Direccion:",file_path
 						nodoNuevo=Node(Archivo(file))
 						tree.add(nodoNuevo)
 			if rootChilds:
+				print "Root childs: ", rootChilds
 				if rootChilds[0] is "folder":
 					for child in rootChilds[1]:
+						print "Agregando al root", child
 						self.buildTree(path=child, tree=tree, _rootNode=True)
 						tree.currentNode= tree.root
 				else:
 					for child in rootChilds[1]:
+						print "Agregando al root", child
 						tree.add(Node(Archivo(os.path.basename(child))))
 		except Exception as e:
 			print 'buildTree Exception: ', e
