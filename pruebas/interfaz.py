@@ -17,7 +17,6 @@ class Window(QtGui.QWidget):
 		self.workingReadingDir= ""
 		self.workingSavingDir= ""
 		self.password= "Password"
-		self.savePassword= False
 
 		self.caller= Caller()
 
@@ -40,6 +39,7 @@ class Window(QtGui.QWidget):
 		comboBox.addItem("Blowfish")
 		#color
 		comboBox.setStyleSheet("background:#c98828")
+		comboBox.setStyleSheet("color:white")
 		
 
 		# TextBox para el almacenamiento de direcciones
@@ -55,16 +55,13 @@ class Window(QtGui.QWidget):
 		self.savingTextBox.setText("Almacenamiento de cifrado")
 
 		label= QtGui.QLabel("Algoritmo:")
+		label.setStyleSheet("color: #d4f0f9")
 
 		self.passTextBox= QtGui.QLineEdit(self)
 		self.passTextBox.setText("Password")
 		self.passTextBox.textChanged[str].connect(self.setPassword)
 		self.passTextBox.resize(30, 10)
 		self.passTextBox.setStyleSheet("background: white")
-
-		self.passCheckBox= QtGui.QCheckBox(u"Guardar Contraseña", self)
-		self.passCheckBox.stateChanged.connect(self.savePasswordBool)
-		self.passCheckBox.setStyleSheet("background: #d4f0f9")
 
 		# Definicion de botones
 		readingDirBtn= QtGui.QPushButton(u'\u25bc', self)
@@ -103,15 +100,15 @@ class Window(QtGui.QWidget):
 		gridLayout.addWidget(self.savingTextBox, 2, 0)
 		gridLayout.addWidget(savingDirBtn, 2, 1)
 
-		gridLayout.addWidget(self.treeWidget, 3, 0, 6, 1)
+		gridLayout.addWidget(self.treeWidget, 3, 0, 8, 1)
 
-		gridLayout.addWidget(comboBox, 3, 1)
+		gridLayout.addWidget(comboBox, 4, 1)
 		
 		gridLayout.addWidget(encryptBtn, 6,1)
 		gridLayout.addWidget(decryptBtn, 7,1)
 
-		gridLayout.addWidget(self.passTextBox, 4, 1, 1, 2)
-		gridLayout.addWidget(self.passCheckBox, 5, 1)
+		gridLayout.addWidget(self.passTextBox, 5, 1, 1, 2)
+		gridLayout.addWidget(label, 3, 1)
 
 		# Establecemos gridLayout como el layout principal
 		self.setLayout(gridLayout)
