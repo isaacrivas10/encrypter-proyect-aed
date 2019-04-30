@@ -163,16 +163,16 @@ class BaseEncryptor(object):
 		self.log.logThis("\t Desencriptando con ", algorithm, takeTime= True)
 		self.log.logThis("Path: ",path, "\n")
 
-		# if extractionPath:
-		# 	dirs= [x for o in path for x in self.getAllFiles(o)]
-		# 	array= []
-		# 	self.buildPathsFromTree(extractionPath[1], extractionPath[0],array)
-		# 	for file in array:
-		# 		if os.path.exists(os.path.dirname(file)):
-		# 			continue
-		# 		else:
-		# 			os.makedirs(os.path.dirname(file))
-		# 	[[self.log.logThis("Encriptando: ", f),self.encrypt(f,file)] for file in array for f in dirs if os.path.basename(file) == os.path.basename(f)]
+		if extractionPath:
+			dirs= [x for o in path for x in self.getAllFiles(o)]
+			array= []
+			self.buildPathsFromTree(extractionPath[1], extractionPath[0],array)
+			for file in array:
+				if os.path.exists(os.path.dirname(file)):
+					continue
+				else:
+					os.makedirs(os.path.dirname(file))
+			[[self.log.logThis("Desencriptando: ", f),self.decrypt(f,file)] for file in array for f in dirs if os.path.basename(file) == os.path.basename(f) if f[-4:] == '.enc']
 
 		for p in path:
 			dirs= self.getAllFiles(p)
@@ -203,6 +203,7 @@ class BaseEncryptor(object):
 		self.log.logThis("\t Desencriptando con ", algorithm, takeTime= True)
 		self.log.logThis("Path: ", path, "\n")
 		
+		print extractionPath
 		for p in path:
 			self.log.logThis("Desencriptando: ", p)
 			if extractionPath:
@@ -227,7 +228,7 @@ class AESEncryptor(BaseEncryptor):
 	def __init__(self):
 		super(AESEncryptor, self).__init__()
 
-	def setKey(self, key):<
+	def setKey(self, key):
 		newKey= SHA256.new(key)
 		self.key= newKey.digest()
 
@@ -264,7 +265,9 @@ class AESEncryptor(BaseEncryptor):
 
 		if path:
 			basename= os.path.basename(file)
-			f_name= path[0].strip(basename) +'/(DEC)'+basename[:-4]
+			print basename
+			f_name= path[0] +'/(DEC)'+basename[:-4]
+			print f_name
 		else:
 			f_name= file[:-4]
 		
@@ -304,6 +307,7 @@ class BlowfishEncryptor(BaseEncryptor):
 		if path:
 			basename= os.path.basename(filePath)
 			f_name= path[0].strip(basename) +'/(DEC)'+basename[:-4]
+			print f_name
 		else:
 			f_name= filePath[:-4]
 		

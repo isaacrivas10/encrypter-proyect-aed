@@ -431,3 +431,100 @@ Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/g.html
 Path: ['/home/drunkenboy_/python2/3parcial/pruebas/g.html']
 
 Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/g.html
+
+2019-04-29 23:44:29	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/Algunas-Cositas-master/AQUAMAN Trailer 2 (4K ULTRA HD) NEW 2018-9Yam5B_iasY.mp4']
+
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/Algunas-Cositas-master/AQUAMAN Trailer 2 (4K ULTRA HD) NEW 2018-9Yam5B_iasY.mp4
+
+2019-04-29 23:45:20		 Desencriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/Algunas-Cositas-master/AQUAMAN Trailer 2 (4K ULTRA HD) NEW 2018-9Yam5B_iasY.mp4.enc']
+
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/Algunas-Cositas-master/AQUAMAN Trailer 2 (4K ULTRA HD) NEW 2018-9Yam5B_iasY.mp4.enc
+
+2019-04-29 23:46:32		 Desencriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/Algunas-Cositas-master/aquaman.mp4.enc']
+
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/Algunas-Cositas-master/aquaman.mp4.enc
+
+2019-04-29 23:47:42	Encriptando con Blowfish
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/Algunas-Cositas-master/(DEC)aquaman.mp4']
+
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/Algunas-Cositas-master/(DEC)aquaman.mp4
+
+2019-04-30 09:37:06	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/Algunas-Cositas-master/YT DOWNLOADER.py']
+
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/Algunas-Cositas-master/YT DOWNLOADER.py
+
+2019-04-30 09:37:58		 Desencriptando con AES256
+Path: ['/home/drunkenboy_/enc/YT DOWNLOADER.py.enc']
+
+Desencriptando: /home/drunkenboy_/enc/YT DOWNLOADER.py.enc
+
+2019-04-30 09:45:08	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py', '/home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py', '/home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py']
+
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py
+
+2019-04-30 09:45:21	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py', '/home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py', '/home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py']
+
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py
+
+2019-04-30 09:46:52		 Desencriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc']
+
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc
+
+2019-04-30 09:48:56	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc']
+
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc
+
+2019-04-30 09:49:25		 Desencriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc']
+
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc
+
+2019-04-30 09:52:55		 Desencriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc']
+
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc
+
+2019-04-30 09:53:22		 Desencriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc']
+
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc
+
+2019-04-30 09:54:54		 Desencriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc']
+
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc
+
+2019-04-30 09:55:54		 Desencriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc']
+
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc
+Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc
