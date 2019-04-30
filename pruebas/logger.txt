@@ -528,3 +528,16 @@ Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc
 Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc
 Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc
 Desencriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc
+
+2019-04-30 11:59:28	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc', '/home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc']
+
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/qfile.py.enc
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/g.html.enc
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/prueba.py.enc
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/enc.py.enc
+
+2019-04-30 12:00:46	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/pp/g.html']
+
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/pp/g.html

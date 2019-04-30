@@ -122,8 +122,7 @@ class Window(QtGui.QWidget):
 	def encrypt(self):
 		
 		extractionPath= str(self.workingSavingDir)
-		if extractionPath is os.path.dirname(self.path[1][0]):
-			
+		if extractionPath == os.path.dirname(self.path[1][0]):
 			self.caller.encrypt(path= self.path, 
 				algorithm= self.currentAlgorithm,
 				key= self.password)
@@ -134,11 +133,13 @@ class Window(QtGui.QWidget):
 			extraction= [extractionPath, self.tree],
 			algorithm= self.currentAlgorithm,
 			key= self.password)
+		msg= QtGui.QMessageBox()
+		msg.setIcon(QtGui.QMessageBox.Information)
+		msg.setText("ENCRIPTADO COMPLETADO")
+		msg.exec_()
 						
 	def decrypt(self):
 		extractionPath= str(self.workingSavingDir)
-		print extractionPath
-		print os.path.dirname(self.path[1][0])
 		if extractionPath == os.path.dirname(self.path[1][0]):
 			self.caller.decrypt(path= self.path, 
 				algorithm= self.currentAlgorithm,
@@ -150,13 +151,16 @@ class Window(QtGui.QWidget):
 				extraction= [extractionPath, self.tree],
 				algorithm= self.currentAlgorithm,
 				key= self.password)
+		msg= QtGui.QMessageBox()
+		msg.setIcon(QtGui.QMessageBox.Information)
+		msg.setText("DESENCPRIPTADO COMPLETADO")
+		msg.exec_()
 
 	def setPassword(self, text):
 		self.password= unicode(self.passTextBox.text())
 		
 	def setEncriptionAlgorithm(self, algrithm):
 		self.currentAlgorithm= algrithm
-
 
 	def openFolder(self, param):
 		openF = FileDialog()
