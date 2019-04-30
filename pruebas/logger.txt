@@ -256,3 +256,168 @@ Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/enc.py
 Path: ['/home/drunkenboy_/python2/3parcial/pruebas/enc.py']
 
 Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/enc.py
+
+2019-04-29 20:02:53	Encriptando con AES256
+Path: ['/home/drunkenboy_/examples.desktop']
+
+Encriptando: /home/drunkenboy_/examples.desktop
+
+2019-04-29 20:03:39	Encriptando con AES256
+Path: ['/home/drunkenboy_/examples.desktop']
+
+Encriptando: /home/drunkenboy_/examples.desktop
+
+2019-04-29 20:03:43	Encriptando con AES256
+Path: ['/home/drunkenboy_/examples.desktop']
+
+Encriptando: /home/drunkenboy_/examples.desktop
+
+2019-04-29 20:03:43	Encriptando con AES256
+Path: ['/home/drunkenboy_/examples.desktop']
+
+Encriptando: /home/drunkenboy_/examples.desktop
+
+2019-04-29 20:03:44	Encriptando con AES256
+Path: ['/home/drunkenboy_/examples.desktop']
+
+Encriptando: /home/drunkenboy_/examples.desktop
+
+2019-04-29 20:03:44	Encriptando con AES256
+Path: ['/home/drunkenboy_/examples.desktop']
+
+Encriptando: /home/drunkenboy_/examples.desktop
+
+2019-04-29 20:03:44	Encriptando con AES256
+Path: ['/home/drunkenboy_/examples.desktop']
+
+Encriptando: /home/drunkenboy_/examples.desktop
+
+2019-04-29 20:03:44	Encriptando con AES256
+Path: ['/home/drunkenboy_/examples.desktop']
+
+Encriptando: /home/drunkenboy_/examples.desktop
+
+2019-04-29 20:03:44	Encriptando con AES256
+Path: ['/home/drunkenboy_/examples.desktop']
+
+Encriptando: /home/drunkenboy_/examples.desktop
+
+2019-04-29 20:03:44	Encriptando con AES256
+Path: ['/home/drunkenboy_/examples.desktop']
+
+Encriptando: /home/drunkenboy_/examples.desktop
+
+2019-04-29 20:05:40	Encriptando con AES256
+Path: ['/home/drunkenboy_/examples.desktop']
+
+Encriptando: /home/drunkenboy_/examples.desktop
+
+2019-04-29 20:06:18	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/README.md']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/README.md
+
+2019-04-29 20:29:55	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/README.md']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/README.md
+
+2019-04-29 20:30:49		 Desencriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/README.md']
+
+Desencriptando: /home/drunkenboy_/python2/gitproyect/README.md
+
+2019-04-29 20:31:55	Encriptando con Blowfish
+Path: ['/home/drunkenboy_/python2/gitproyect/README.md']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/README.md
+
+2019-04-29 20:35:53	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/README.md']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/README.md
+
+2019-04-29 20:37:31	Encriptando con Blowfish
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/temp.py']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py
+
+2019-04-29 20:38:12	Encriptando con Blowfish
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/temp.py']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py
+
+2019-04-29 20:38:38	Encriptando con Blowfish
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/temp.py']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py
+
+2019-04-29 20:39:02	Encriptando con Blowfish
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/temp.py']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py
+
+2019-04-29 20:39:11	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/temp.py']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py
+
+2019-04-29 20:40:10	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/temp.py']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py
+
+2019-04-29 20:41:38	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/temp.py']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py
+
+2019-04-29 20:42:47	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/arbol.json']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/arbol.json
+
+2019-04-29 20:45:15	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/temp.py']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py
+
+2019-04-29 20:49:19	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/temp.py']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py
+
+2019-04-29 20:56:17	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/temp.py']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py
+
+2019-04-29 21:02:16	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/temp.py']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py
+
+2019-04-29 21:03:47	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/temp.py']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py
+
+2019-04-29 21:04:06	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/temp.py']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py
+
+2019-04-29 21:04:23	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/temp.py']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py
+
+2019-04-29 21:10:08	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/gitproyect/pruebas/nodes.pyc', '/home/drunkenboy_/python2/gitproyect/pruebas/temp.py', '/home/drunkenboy_/python2/gitproyect/pruebas/temp.py.enc', '/home/drunkenboy_/python2/gitproyect/pruebas/temp.pyc', '/home/drunkenboy_/python2/gitproyect/pruebas/tempArbol.py', '/home/drunkenboy_/python2/gitproyect/pruebas/tempArbol.pyc']
+
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/nodes.pyc
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py.enc
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.pyc
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/tempArbol.py
+Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/tempArbol.pyc

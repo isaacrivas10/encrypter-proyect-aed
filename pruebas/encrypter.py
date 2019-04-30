@@ -144,7 +144,10 @@ class BaseEncryptor(object):
 
 		for p in path:
 			self.log.logThis("Encriptando: ", p)
-			self.encrypt(p, extractionPath[0])
+			if extractionPath:
+				self.encrypt(p, extractionPath[0], True)
+			else:
+				self.encrypt(p)
 		self.log.closeLog()
 
 	def decryptThisFiles(self, path, algorithm, extractionPath= None):
@@ -154,7 +157,10 @@ class BaseEncryptor(object):
 		
 		for p in path:
 			self.log.logThis("Desencriptando: ", p)
-			self.decrypt(p, extractionPath[0])
+			if extractionPath:
+				self.decrypt(p, extractionPath)
+			else:
+				self.decrypt(p)
 		self.log.closeLog()
 
 	def readFileBytes(self, filename):
@@ -182,7 +188,7 @@ class AESEncryptor(BaseEncryptor):
 		string += (chr(length))*length
 		return string
 
-	def encrypt(self, filePath, path=None):
+	def encrypt(self, filePath, path=None, _file=None):
 		
 		file_data= self.readFileBytes(filePath)		
 		data= self.pad(file_data)
@@ -191,7 +197,10 @@ class AESEncryptor(BaseEncryptor):
 		cipherData= iv + AESCipher.encrypt(data)
 		
 		if path:
-			f_name= path+'.enc'
+			if _file:
+				f_name= os.path.join(path,os.path.basename(filePath)+'.enc')
+			else:
+				f_name= path+'.enc'
 		else:
 			f_name= filePath + '.enc'
 
@@ -222,14 +231,17 @@ class BlowfishEncryptor(BaseEncryptor):
 	def setKey(self, key):
 		self.key= key
 
-	def encrypt(self, filePath, path=None):
+	def encrypt(self, filePath, path=None, _file=None):
 		
 		file_data= self.readFileBytes(filePath)
 		BFcipher= BF.new(self.key)
 		cipherData= BFcipher.encrypt(self.pad(file_data))
 
 		if path:
-			f_name= path + '.enc'
+			if _file:
+				f_name= os.path.join(path,os.path.basename(filePath)+'.enc')
+			else:
+				f_name= path+'.enc'
 		else:
 			f_name= filePath + '.enc'
 

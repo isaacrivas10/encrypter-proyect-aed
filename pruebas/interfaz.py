@@ -122,7 +122,7 @@ class Window(QtGui.QWidget):
 	def encrypt(self):
 		
 		extractionPath= str(self.workingSavingDir)
-		if extractionPath in (self.path[1][0]):
+		if extractionPath is os.path.dirname(self.path[1][0]):
 			self.caller.encrypt(path= self.path, 
 				algorithm= self.currentAlgorithm,
 				key= self.password)
@@ -136,7 +136,7 @@ class Window(QtGui.QWidget):
 						
 	def decrypt(self):
 		extractionPath= str(self.workingSavingDir)
-		if extractionPath in (self.path[1][0]):
+		if extractionPath is os.path.dirname(self.path[1][0]):
 			self.caller.decrypt(path= self.path, 
 				algorithm= self.currentAlgorithm,
 				key= self.password)
