@@ -123,6 +123,7 @@ class Window(QtGui.QWidget):
 		
 		extractionPath= str(self.workingSavingDir)
 		if extractionPath is os.path.dirname(self.path[1][0]):
+			
 			self.caller.encrypt(path= self.path, 
 				algorithm= self.currentAlgorithm,
 				key= self.password)
@@ -147,13 +148,6 @@ class Window(QtGui.QWidget):
 				extraction= [extractionPath, self.tree],
 				algorithm= self.currentAlgorithm,
 				key= self.password)
-
-	def savePasswordBool(self):
-		if self.passCheckBox.isChecked():
-			self.savePassword= True
-		else:	
-			self.savePassword= False
-		print self.cipher.key
 
 	def setPassword(self, text):
 		self.password= unicode(self.passTextBox.text())

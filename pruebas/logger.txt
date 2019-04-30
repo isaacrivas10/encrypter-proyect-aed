@@ -421,3 +421,13 @@ Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.py.enc
 Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/temp.pyc
 Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/tempArbol.py
 Encriptando: /home/drunkenboy_/python2/gitproyect/pruebas/tempArbol.pyc
+
+2019-04-29 21:58:48	Encriptando con AES256
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/g.html']
+
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/g.html
+
+2019-04-29 22:00:23	Encriptando con Blowfish
+Path: ['/home/drunkenboy_/python2/3parcial/pruebas/g.html']
+
+Encriptando: /home/drunkenboy_/python2/3parcial/pruebas/g.html

@@ -8,7 +8,38 @@ import Crypto.Hash.SHA256 as SHA256
 from random import randrange
 from log import Logger
 
+"""
+La clase Caller es la encargada de llamar a los algoritmos en base
+a la informacion que se le brinde
+
+La clase BaseEncryptor es una clase con metodos generales para encriptar 
+y desencriptar:
+Metodos:
+	Principales:
+		EncryptAllInPath
+		DecryptAllInPath
+		EncryptThisFiles
+		DecryptThisFiles
+	Secundarios:
+		getAllFiles
+		buildPathsFromTree
+		write
+		read
+
+La clase AESEncryptor y BlowfishEncryptor hereda los metodos de BaseEncryptor
+Cada uno tiene los metodos especificos para su algoritmo
+Metodos:
+	setKey
+	encrypt
+	decrypt
+
+"""
+
+
 class Caller:
+	"""
+		Clase de llamada para los algoritmos de encriptacion
+	"""
 
 	def __init__(self):
 		self.aes= AESEncryptor()
@@ -51,8 +82,6 @@ class Caller:
 				self.bf.setKey(key)
 				self.bf.decryptThisFiles(path[1], algorithm,extraction)
 
-
-
 class BaseEncryptor(object):
 
 	def __init__(self):
@@ -69,6 +98,18 @@ class BaseEncryptor(object):
 
 	
 	def buildPathsFromTree(self, tree, string, arreglo):
+		"""
+			tree hace referencia al arbol TDA
+			string debe ser la direccion donde se va extraer
+			Arreglo se va a poblar con cada string
+
+			string genera una direccion por cada archivo en el arbol
+			root -> nodo1 -> nodo2 -> archivo
+			Por cada archivo /root/nodo1/nodo2/archivo
+			string/root/nodo1/nodo2/archivo
+			llenar el arreglo asi:
+			string /home/estudiante/algoritmos/root/nodo1/nodo2/archivo
+		"""
 
 		#Busca archivos en el arbol recursivamente
 		#Suponiendo que el root es el currentNode
@@ -89,8 +130,15 @@ class BaseEncryptor(object):
 		self.log.openLog()
 		self.log.logThis("Encriptando con ", algorithm, takeTime= True)
 		self.log.logThis("Path: ", path, "\n")
+		
+		# ExtractionPath es un arreglo distribuido asi:
+		# 	[0]  es una ruta especifca existente en el hdd
+		#	[1]  es un arbol
+		#  Si hay una ruta de extraccion
 		if extractionPath:
+			# Saco todos los archivos por cada path recibido
 			dirs= [x for o in path for x in self.getAllFiles(o)]
+			# Replicar misma logica en decrypt
 			array= []
 			self.buildPathsFromTree(extractionPath[1], extractionPath[0],array)
 			for file in array:
@@ -129,7 +177,7 @@ class BaseEncryptor(object):
 		for p in path:
 			dirs= self.getAllFiles(p)
 			if len(dirs) > 0:
-				for file in dirs:
+				for file in dirs:					
 					if file[-4:] == '.enc':
 						self.log.logThis("Desencriptando: ", file)
 						self.decrypt(file, extractionPath)
@@ -179,7 +227,7 @@ class AESEncryptor(BaseEncryptor):
 	def __init__(self):
 		super(AESEncryptor, self).__init__()
 
-	def setKey(self, key):
+	def setKey(self, key):<
 		newKey= SHA256.new(key)
 		self.key= newKey.digest()
 
