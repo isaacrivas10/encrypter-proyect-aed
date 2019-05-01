@@ -6,6 +6,7 @@ class Logger:
 		self.name= 'logger.txt'
 		self.file= None
 		self.timer= datetime.datetime
+		self.executionTime= ExecutionTime()
 
 	def openLog(self):
 		self.file= open(self.name, "a")
@@ -26,3 +27,20 @@ class Logger:
 	def closeLog(self):
 		if self.file:
 			self.file.close()
+
+
+class ExecutionTime:
+    
+    def getTime(self):
+        return datetime.datetime.now()
+    
+    def diff(self,i,f):
+        diff=f-i
+
+        #produce milisegundos
+        m=diff.days*24*60*60*1000
+        m+=diff.seconds*1000
+        m+=diff.microseconds/100
+        return m
+    
+

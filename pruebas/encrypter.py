@@ -44,9 +44,12 @@ class Caller:
 	def __init__(self):
 		self.aes= AESEncryptor()
 		self.bf= BlowfishEncryptor()
+		self.log= Logger()
 
 	def encrypt(self, key, algorithm, path, extraction= None):
-		
+		#Comenzamos a tomar el tiempo
+		i=self.log.executionTime.getTime()
+
 		if path[0] is "folder":
 			if algorithm == "AES256":
 
@@ -63,8 +66,17 @@ class Caller:
 			else:
 				self.bf.setKey(key)
 				self.bf.encryptThisFiles(path[1], algorithm,extraction)
+		self.log.openLog()
+		self.log.logThis(" Tiempo de Encriptacion -> ",
+			self.log.executionTime.diff(i, self.log.executionTime.getTime()),
+			" milisegundos.")
+		self.log.logThis("------------------------------------------")
+		self.log.closeLog()
 
 	def decrypt(self, key, algorithm, path, extraction= None):
+		#Comenzamos a tomar el tiempo
+		i=self.log.executionTime.getTime()
+
 		if path[0] is "folder":
 			if algorithm == "AES256":
 
@@ -81,6 +93,13 @@ class Caller:
 			else:
 				self.bf.setKey(key)
 				self.bf.decryptThisFiles(path[1], algorithm,extraction)
+
+		self.log.openLog()
+		self.log.logThis(" Tiempo de Desencriptacion -> ",
+			self.log.executionTime.diff(i, self.log.executionTime.getTime()),
+			" milisegundos.")
+		self.log.logThis("------------------------------------------")
+		self.log.closeLog()
 
 class BaseEncryptor(object):
 

@@ -23,6 +23,8 @@ class Window(QtGui.QWidget):
 		self.tree= None
 		self.path= None
 
+		self._want_to_close= False
+
 		self.setGeometry(350,200,700,350)
 		self.setWindowTitle("Python Encrypter")
 		self.setWindowIcon(QtGui.QIcon("123.jpg"))
@@ -171,34 +173,36 @@ class Window(QtGui.QWidget):
 			output= openF.getFiles()
 			self.path= output
 
-			if output is not True:
-				if len(output[1]) is 1 and output[0] is "folder":
-					self.workingSavingDir= output[1][0]
-				else:
-					self.workingSavingDir= os.path.dirname(
-						os.path.abspath(output[1][0]))
-				for x in output[1]:
-					path= os.path.join(os.path.dirname(output[1][0]), os.path.basename(x))
-					self.workingReadingDir += path + ";" 
-				self.savingTextBox.setText(self.workingSavingDir)
-				self.readingTextBox.setText(self.workingReadingDir)
-				self.treeWidget.clear()
+			if output:
+				if output is not True:
+					if len(output[1]) is 1 and output[0] is "folder":
+						self.workingSavingDir= output[1][0]
+					else:
+						self.workingSavingDir= os.path.dirname(
+							os.path.abspath(output[1][0]))
+					for x in output[1]:
+						path= os.path.join(os.path.dirname(output[1][0]), os.path.basename(x))
+						self.workingReadingDir += path + ";" 
+					self.savingTextBox.setText(self.workingSavingDir)
+					self.readingTextBox.setText(self.workingReadingDir)
+					self.treeWidget.clear()
 
-				self.treeConstructor(output)
-			else:
-				msg= QtGui.QMessageBox()
-				msg.setIcon(QtGui.QMessageBox.Warning)
-				msg.setWindowTitle("File dialog error")
-				msg.setText("Error")
-				msg.setDetailedText("Por favor escoger un solo tipo de objeto\nEjemplo:\n\tSolo archivos \n\tSolo carpetas")
-				msg.exec_()
+					self.treeConstructor(output)
+				else:
+					msg= QtGui.QMessageBox()
+					msg.setIcon(QtGui.QMessageBox.Warning)
+					msg.setWindowTitle("File dialog error")
+					msg.setText("Error")
+					msg.setDetailedText("Por favor escoger un solo tipo de objeto\nEjemplo:\n\tSolo archivos \n\tSolo carpetas")
+					msg.exec_()
 
 		elif param == "2":
 			openF.setFileMode(QtGui.QFileDialog.Directory)
 			openF.exec_()
 			output= openF.getFiles()
-			self.workingSavingDir= output[1][0]
-			self.savingTextBox.setText(output[1][0])
+			if output:
+				self.workingSavingDir= output[1][0]
+				self.savingTextBox.setText(output[1][0])
 
 	def treeConstructor(self, output):
 
@@ -316,6 +320,15 @@ class Window(QtGui.QWidget):
 				arreglo.append(tempD)
 			node = node.next
 
+	def closeEvent(self, event):
+		msg= QtGui.QMessageBox(self)
+		msg.setText(u"No olvides con que contraseña encriptas tus archivos!")
+		msg.setIcon(QtGui.QMessageBox.Information)
+		msg.setWindowTitle("Adios!")
+		msg.exec_()
+		event.accept()
+
+
 class FileDialog(QtGui.QFileDialog):
 	"""docstring for FileDialog"""
 	def __init__(self):
@@ -344,10 +357,3 @@ class FileDialog(QtGui.QFileDialog):
 					return [k, v]
 		self.fixedFiles= {"folder": [], "file":[]}
 
-def run():
-	app= QtGui.QApplication(sys.argv)
-	GUI= Window()
-	sys.exit(app.exec_())
-
-if __name__ == '__main__':
-	run()
